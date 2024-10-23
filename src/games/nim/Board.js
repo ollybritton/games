@@ -1,6 +1,6 @@
 import React from 'react';
 
-import "./styles.css"
+import styles from "./styles.module.css"
 
 export function Board({ ctx, G, moves }) {
     const onClick = (index, removeAmount) => moves.clickPile(index, removeAmount);
@@ -8,9 +8,9 @@ export function Board({ ctx, G, moves }) {
     let subtitle = '';
 
     if (ctx.gameover) {
-        subtitle = <div id="winner">Winner: {ctx.gameover.winner}</div>
+        subtitle = <div id="winner">Winner: {ctx.gameover.winner === "0" ? "L" : "R"}</div>
     } else {
-        subtitle = <div id="to-move">To move: {ctx.currentPlayer}</div>
+        subtitle = <div id="to-move">To move: {ctx.currentPlayer === "0" ? "L" : "R"}</div>
     }
     
     let piles = [];
@@ -29,7 +29,7 @@ export function Board({ ctx, G, moves }) {
     
     return (
         <div>
-            <div className="board">{piles}</div>
+            <div className={styles.board}>{piles}</div>
             <hr />
             {subtitle}
         </div>
@@ -41,13 +41,13 @@ function Pile({index, initialSize, size, clickPile}) {
 
     for (let i = initialSize-1; i >= 0; i--) {
         if (i < size) {
-            stones.push(<div className="stone" key={i} onClick={() => clickPile(index, size - i)} />)
+            stones.push(<div className={styles.stone} key={i} onClick={() => clickPile(index, size - i)} />)
         } else {
-            stones.push(<div className="clicked-stone" key={i} />)
+            stones.push(<div className={styles["clicked-stone"]} key={i} />)
         }
     }
 
     return (
-        <div className="pile">{stones}</div>
+        <div className={styles.pile}>{stones}</div>
     )
 }

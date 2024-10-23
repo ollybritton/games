@@ -40,5 +40,5 @@ export const Game = {
 
 // Return true if `cells` is in a winning configuration.
 function IsVictory(piles) {
-    return piles.every(pile => pile.every(section => section == 0));
+    return piles.every(pile => pile.every(section => section === 0));
 }
