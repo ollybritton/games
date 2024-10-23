@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         element: game.element,
         errorElement: <ErrorPage />,
     }))
-])
+], { basename: process.env.PUBLIC_URL })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
