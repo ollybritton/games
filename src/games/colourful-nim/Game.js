@@ -1,7 +1,15 @@
 export const Game = {
     setup: ({random}) => {
         let numPiles = random.Die(6);
-        let piles = random.Die(6, numPiles)
+        let piles = [];
+
+        for (let i = 0; i < numPiles; i++) {
+            let numSections = random.Die(4);
+            let sections = random.Die(3, numSections);
+            
+            piles.push(sections);
+        }
+
         let initialPiles = [...piles];
 
         return {
@@ -16,8 +24,10 @@ export const Game = {
     },
 
     moves: {
-        clickPile: ({ G, playerID }, index, removeAmount) => {
-            G.piles[index] -= removeAmount;
+        clickPile: ({ G, playerID }, index, sectionIndex, removeAmount) => {
+            let pile = G.piles[index];
+
+            pile[sectionIndex] -= removeAmount;
         },
     },
 
@@ -30,5 +40,5 @@ export const Game = {
 
 // Return true if `cells` is in a winning configuration.
 function IsVictory(piles) {
-    return piles.every(pile => pile == 0);
+    return piles.every(pile => pile.every(section => section == 0));
 }

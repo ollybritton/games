@@ -1,0 +1,42 @@
+.board {
+    display: flex;
+    align-items: end;
+    gap: 7px;
+}
+
+.pile {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stone {
+    border: 1px solid #000;
+    background: #eee;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.red {
+    background: #ff0000;
+}
+
+.yellow {
+    background: #ffff00;
+}
+
+.clicked-stone {
+    background: #fff !important;
+    border: 1px solid #fff;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.top {
+    opacity: 60%;
+}
