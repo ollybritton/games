@@ -3,14 +3,6 @@ import React from 'react';
 import styles from "./styles.module.css"
 
 export function Board({ ctx, G, moves }) {
-    let subtitle = '';
-
-    if (ctx.gameover) {
-        subtitle = <div id="winner">Winner: {ctx.gameover.winner === "0" ? "L" : "R"}</div>
-    } else {
-        subtitle = <div id="to-move">To move: {ctx.currentPlayer === "0" ? "L" : "R"}</div>
-    }
-    
     let piles = [];
 
     for (let i = 0; i < G.piles.length; i++) {
@@ -25,13 +17,7 @@ export function Board({ ctx, G, moves }) {
         );
     }
     
-    return (
-        <div>
-            <div className={styles.board}>{piles}</div>
-            <hr />
-            {subtitle}
-        </div>
-    );
+    return <div className={styles.board}>{piles}</div>
 }
 
 function Pile({index, initialPile, pile, clickPile}) {
@@ -66,5 +52,23 @@ function Pile({index, initialPile, pile, clickPile}) {
 
     return (
         <div className="pile">{stones}</div>
+    )
+}
+
+export function BoardFull({ ctx, G, moves }) {
+    let subtitle = '';
+
+    if (ctx.gameover) {
+        subtitle = <div id="winner">Winner: {ctx.gameover.winner === "0" ? "L" : "R"}</div>
+    } else {
+        subtitle = <div id="to-move">To move: {ctx.currentPlayer === "0" ? "L" : "R"}</div>
+    }
+
+    return (
+        <div>
+            <Board ctx={ctx} G={G} moves={moves} />
+            <hr />
+            <p>{subtitle}</p>
+        </div>
     )
 }

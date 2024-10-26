@@ -1,25 +1,11 @@
 import React from 'react';
 
+import styles from "./styles.module.css"
+
 export function Board({ ctx, G, moves }) {
     const onClick = (id) => moves.clickCell(id);
 
-    let winner = '';
 
-    if (ctx.gameover) {
-        if (ctx.gameover.winner !== undefined) {
-            winner = <div id="winner">Winner: {ctx.gameover.winner}</div>
-        } else {
-            winner = <div id="winner">Draw!</div>
-        }
-    }
-
-    const cellStyle = {
-        border: '1px solid #555',
-        width: '50px',
-        height: '50px',
-        lineHeight: '50px',
-        textAlign: 'center',
-    };
     
     let tbody = [];
     for (let i = 0; i < 3; i++) {
@@ -29,9 +15,9 @@ export function Board({ ctx, G, moves }) {
             cells.push(
                 <td key={id}>
                     {G.cells[id] ? (
-                        <div style={cellStyle}>{G.cells[id]}</div>
+                        <div className={styles.cell}>{G.cells[id] === "0" ? "X" : "O"}</div>
                     ) : (
-                        <div style={cellStyle} onClick={() => onClick(id)} />
+                        <div className={styles.cell} onClick={() => onClick(id)} />
                     )}
                 </td>
             );
@@ -40,14 +26,27 @@ export function Board({ ctx, G, moves }) {
     }
     
     return (
-        <div>
-            <table id="board">
-                <tbody>{tbody}</tbody>
-            </table>
-
-            <hr />
-
-            {winner}
-        </div>
+        <table className={ctx.gameover ? styles.gameOver : ""}>
+            <tbody>{tbody}</tbody>
+        </table>
     );
+}
+
+export function BoardFull({ctx, G, moves}) {
+    let infoText = '';
+
+    if (ctx.gameover) {
+        if (ctx.gameover.winner !== undefined) {
+            infoText = <div id="winner">Winner: {ctx.gameover.winner === "0" ? "X" : "O"}</div>
+        } else {
+            infoText = <div id="winner">Draw!</div>
+        }
+    } else {
+        infoText = `To move: ${ctx.currentPlayer === "0" ? "X" : "O"}`
+    }
+
+    return <div>
+        <Board ctx={ctx} G={G} moves={moves} />
+        <p>{infoText}</p>
+    </div>
 }

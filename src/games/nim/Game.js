@@ -26,9 +26,25 @@ export const Game = {
             return { winner: ctx.currentPlayer };
         }
     },
+
+    ai: {
+        enumerate: (G, ctx) => {
+            let moves = [];
+
+            for (let i = 0; i < G.piles.length; i++) {
+                for (let removeAmount = 1; removeAmount <= G.piles[i]; removeAmount++) {
+                    moves.push({
+                        move: 'clickPile',
+                        args: [i, removeAmount],
+                    })
+                }
+            }
+
+            return moves;
+        }
+    }
 };
 
-// Return true if `cells` is in a winning configuration.
 function IsVictory(piles) {
-    return piles.every(pile => pile == 0);
+    return piles.every(pile => pile === 0);
 }

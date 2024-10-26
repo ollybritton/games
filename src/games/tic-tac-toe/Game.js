@@ -41,7 +41,6 @@ export const Game = {
     },
 };
 
-// Return true if `cells` is in a winning configuration.
 function IsVictory(cells) {
     const positions = [
       [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6],
@@ -56,7 +55,6 @@ function IsVictory(cells) {
     return positions.map(isRowComplete).some(i => i === true);
 }
   
-// Return true if all `cells` are occupied.
 function IsDraw(cells) {
     return cells.filter(c => c === null).length === 0;
 }

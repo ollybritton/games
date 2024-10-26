@@ -36,9 +36,33 @@ export const Game = {
             return { winner: ctx.currentPlayer };
         }
     },
+
+    ai: {
+        enumerate: (G, ctx) => {
+            let moves = [];
+
+            for (let i = 0; i < G.piles.length; i++) {
+                for (let sectionIndex = G.piles[i].length - 1; sectionIndex >= 0; sectionIndex--) {
+                    let pile = G.piles[i][sectionIndex]
+
+                    if (pile > 0) {
+                        for (let removeAmount = 1; removeAmount <= pile; removeAmount++) {
+                            moves.push({
+                                move: 'clickPile',
+                                args: [i, sectionIndex, removeAmount],
+                            })
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            return moves;
+        }
+    }
 };
 
-// Return true if `cells` is in a winning configuration.
 function IsVictory(piles) {
     return piles.every(pile => pile.every(section => section === 0));
 }
