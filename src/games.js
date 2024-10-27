@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom"
+import { useLoaderData } from "react-router-dom";
 
 import { TicTacToe, TicTacToeFull } from "./games/tic-tac-toe/TicTacToe";
 import { Nim, NimFull } from "./games/nim/Nim";
 import { ColourfulNim, ColourfulNimFull } from "./games/colourful-nim/ColourfulNim"
-import { useLoaderData } from "react-router-dom";
+import { SkiJumps, SkiJumpsFull } from "./games/ski-jumps/SkiJumps";
 
 export const GAMES = [
     {
@@ -29,6 +30,14 @@ export const GAMES = [
 
         element: <ColourfulNim />,
         full: <ColourfulNimFull />,
+    },
+    {
+        name: "Ski Jumps",
+        slug: "ski-jumps",
+        description: "Simple game described in Chapter 1 of Winning Ways.",
+
+        element: <SkiJumps />,
+        full: <SkiJumpsFull />,
     }
 ]
 
