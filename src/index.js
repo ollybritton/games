@@ -14,11 +14,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <Root />,
         errorElement: <ErrorPage />,
-        // children: GAMES.map(game => ({
-        //     path: `/${game.slug}`,
-        //     element: game.element,
-        //     errorElement: <ErrorPage />,
-        // }))
         children: [
             {
                 path: ":gameSlug",

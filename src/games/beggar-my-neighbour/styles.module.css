@@ -1,0 +1,49 @@
+.table {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.deck {
+    width: 180px;
+    height: 252px;
+    background-size: contain;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    user-select: none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    background-color: #aaa;
+}
+
+.middle {
+    width: 120px;
+    height: 168px;
+    background-color: #eee;
+    border: 1px solid black;
+}
+
+.player {
+    cursor: pointer;
+}
+
+.deactivated {
+    opacity: 50%;
+    cursor: not-allowed;
+}
+
+pre {
+    text-align: center;
+}
+
+.container {
+    img {
+        margin: 0 auto;
+    }
+    width: 100%;
+}

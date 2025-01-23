@@ -5,6 +5,7 @@ import { TicTacToe, TicTacToeFull } from "./games/tic-tac-toe/TicTacToe";
 import { Nim, NimFull } from "./games/nim/Nim";
 import { ColourfulNim, ColourfulNimFull } from "./games/colourful-nim/ColourfulNim"
 import { SkiJumps, SkiJumpsFull } from "./games/ski-jumps/SkiJumps";
+import { BeggarMyNeighbour, BeggarMyNeighbourFull } from "./games/beggar-my-neighbour/BeggarMyNeighbour";
 
 export const GAMES = [
     {
@@ -38,6 +39,14 @@ export const GAMES = [
 
         element: <SkiJumps />,
         full: <SkiJumpsFull />,
+    },
+    {
+        name: "Beggar-my-neighbour",
+        slug: "beggar-my-neighbour",
+        description: "A luck-based two-player card game at the centre of a famous problem.",
+
+        element: <BeggarMyNeighbour />,
+        full: <BeggarMyNeighbourFull />,
     }
 ]
 
