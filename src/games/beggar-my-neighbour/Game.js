@@ -38,7 +38,6 @@ export const Game = {
     turn: {
         onBegin: ({ G, ctx, events }) => {
             if (G.deck0.length == 0 && ctx.currentPlayer === "0") {
-                G.totalCards += 1
                 G.totalTricks += 1
                 G.deck1 = G.deck1.concat(G.middle)
                 G.middle = []
@@ -46,7 +45,6 @@ export const Game = {
             }
     
             if (G.deck1.length == 0 && ctx.currentPlayer === "1") {
-                G.totalCards += 1
                 G.totalTricks += 1
                 G.deck0 = G.deck0.concat(G.middle)
                 G.middle = []
