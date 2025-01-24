@@ -18,16 +18,16 @@ export const Game = {
     setup: ({random}) => {
         let shuffled = random.Shuffle(STANDARD_DECK);
 
-        let [deck0, deck1] = FromStringRepr(
-            "---JQ---K-A----A-J-K---QK-",
-            "-J-----------AJQA----K---Q",            
-        )
+        // let [deck0, deck1] = FromStringRepr(
+        //     "---K---Q-KQAJ-----AAJ--J--",
+        //     "----------Q----KQ-J-----KA",            
+        // )
 
         return {
-            // deck0: shuffled.slice(0, 26),
-            // deck1: shuffled.slice(26, 52),
-            deck0: deck0,
-            deck1: deck1,
+            deck0: shuffled.slice(0, 26),
+            deck1: shuffled.slice(26, 52),
+            // deck0: deck0,
+            // deck1: deck1,
             middle: [],
             debt: 0, // +ve if player one needs to pay up, -ve if player two does,
             totalTricks: 0,
@@ -40,12 +40,16 @@ export const Game = {
             if (G.deck0.length == 0 && ctx.currentPlayer === "0") {
                 G.totalCards += 1
                 G.totalTricks += 1
+                G.deck1 = G.deck1.concat(G.middle)
+                G.middle = []
                 return events.endGame({ winner: "1" })
             }
     
             if (G.deck1.length == 0 && ctx.currentPlayer === "1") {
                 G.totalCards += 1
                 G.totalTricks += 1
+                G.deck0 = G.deck0.concat(G.middle)
+                G.middle = []
                 return events.endGame({ winner: "0" })
             }
         }
@@ -59,7 +63,7 @@ export const Game = {
 
             let deck = (deckID === "0") ? G.deck0 : G.deck1;
 
-            let popped = deck.pop();
+            let popped = deck.shift();
             G.totalCards += 1;
             let val = GetValue(popped);
             G.middle.push(popped)
@@ -72,9 +76,9 @@ export const Game = {
                 
                 if (G.debt == 0) {
                     if(playerID === "0") {
-                        G.deck1 = G.middle.reverse().concat(G.deck1)
+                        G.deck1 = G.deck1.concat(G.middle)
                     } else {
-                        G.deck0 = G.middle.reverse().concat(G.deck0)
+                        G.deck0 = G.deck0.concat(G.middle)
                     }
                     G.middle = []
                     G.totalTricks += 1;
@@ -181,7 +185,7 @@ function FromStringRepr(player1Rep, player2Rep) {
         }
     }
 
-    return [player1Deck.reverse(), player2Deck.reverse()]
+    return [player1Deck, player2Deck]
 }
 
 function shuffle(array) { 

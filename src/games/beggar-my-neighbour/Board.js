@@ -51,6 +51,7 @@ export function BoardFull({ ctx, G, moves }) {
             <Board ctx={ctx} G={G} moves={moves} />
             <hr />
             <p>{subtitle}</p>
+            <p>Refresh for a different deal.</p>
         </div>
     )
 }
